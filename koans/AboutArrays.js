@@ -7,12 +7,12 @@ describe("About Arrays", function() {
     expect(emptyArray.length).toBe(0);
 
     var multiTypeArray = [0, 1, "two", function() { return 3; }, {value1: 4, value2: 5}, [6, 7]];
-    expect(multiTypeArray[0]).toBe('number');
-    expect(multiTypeArray[2]).toBe('string');
-    expect(multiTypeArray[3]()).toBe('function');
-    expect(multiTypeArray[4].value1).toBe('number');
-    expect(multiTypeArray[4]["value2"]).toBe('number');
-    expect(multiTypeArray[5][0]).toBe('number');
+    expect(multiTypeArray[0]).toBe(0);
+    expect(multiTypeArray[2]).toBe("two");
+    expect(multiTypeArray[3]()).toBe(3);
+    expect(multiTypeArray[4].value1).toBe(4);
+    expect(multiTypeArray[4]["value2"]).toBe(5);
+    expect(multiTypeArray[5][0]).toBe(6);
   });
 
   it("should understand array literals", function() {
@@ -26,7 +26,7 @@ describe("About Arrays", function() {
     expect(array).toEqual([1, 2]);
     
     array.push(3);
-    expect(array).toEqual([1, 2, 3]]);
+    expect(array).toEqual([1, 2, 3]);
   });
 
   it("should understand array length", function() {
@@ -40,15 +40,15 @@ describe("About Arrays", function() {
     expect(tenEmptyElementArray.length).toBe(10);
 
     tenEmptyElementArray.length = 5;
-    expect(tenEmptyElementArray.length).toBe(10);
+    expect(tenEmptyElementArray.length).toBe(5);
   });
 
   it("should slice arrays", function() {
     var array = ["peanut", "butter", "and", "jelly"];
     
-    expect(array.slice(0, 1)).toEqual(["peanut"]]);
+    expect(array.slice(0, 1)).toEqual(["peanut"]);
     expect(array.slice(0, 2)).toEqual(["peanut", "butter"]);
-    expect(array.slice(2, 2)).toEqual(["and"]);
+    expect(array.slice(2, 2)).toEqual([]);
     expect(array.slice(2, 20)).toEqual(["and", "jelly"]);
     expect(array.slice(3, 0)).toEqual([]);
     expect(array.slice(3, 100)).toEqual(["jelly"]);
@@ -70,14 +70,14 @@ describe("About Arrays", function() {
 
     var copyOfArray = array.slice();
     copyOfArray[3] = "changed in copyOfArray";
-    expect(array[3]).toBe("changed in copyOfArray");
+    expect(array[3]).toBe("three");
   });
 
   it("should push and pop", function() {
     var array = [1, 2];
     array.push(3);
 
-    expect(array).toEqual([1, 2, 3]]);
+    expect(array).toEqual([1, 2, 3]);
     
     var poppedValue = array.pop();
     expect(poppedValue).toBe(3);
