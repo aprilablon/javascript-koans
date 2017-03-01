@@ -69,6 +69,7 @@ describe("About Applying What We Have Learnt", function() {
   });
 
   /*********************************************************************************/
+  
    it("should count the ingredient occurrence (imperative)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
@@ -84,11 +85,12 @@ describe("About Applying What We Have Learnt", function() {
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
-    /* chain() together map(), flatten() and reduce() */
+     
+    // chain() together map(), flatten() and reduce() 
     var ingredientList = _(products).chain()
                                     .map(function(y) {return y.ingredients;})
                                     .flatten()
-                                    .value()
+                                    .value();
 
     // need to come back and fix this as it's not a functional implementation
     for (i = 0; i < ingredientList.length; i++) {
@@ -130,18 +132,63 @@ describe("About Applying What We Have Learnt", function() {
     expect(largestPalindrome).toBe(33);
   });
   
-  // still working on the three problems below
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-    var numbers = _(_.range(1, 20)).map(function(x) {return x % === 0});  
-    
+    var num = 20;
+
+    while (num % 1 !== 0 || num % 2 !== 0 || num % 3 !== 0 || num % 4 !== 0 || num % 5 !== 0 ||
+        num % 6 !== 0 || num % 7 !== 0 || num % 8 !== 0 || num % 9 !== 0 || num % 10 !== 0 ||
+        num % 11 !== 0 || num % 12 !== 0 || num % 13 !== 0 || num % 14 !== 0 || num % 15 !== 0 ||
+        num % 16 !== 0 || num % 17 !== 0 || num % 18 !== 0 || num % 19 !== 0 || num % 20 !== 0) {
+      num += 20;
+    }
+
+    expect(num).toBe(232792560);
   });
 
   it("should find the difference between the sum of the squares and the square of the sums", function () {
-    
+    var arr = [1, 2, 3, 4];
+
+    function sum(arr) {
+      return _(arr).reduce(function(a, b) {return a + b;});
+    }
+
+    function square(arr) {
+      if (typeof arr === 'object') {
+        return _(arr).map(function(x) {return Math.pow(x, 2);});
+      } else if (typeof arr === 'number') {
+        return Math.pow(arr, 2);
+      }
+    }
+
+    var diff = Math.abs((sum(square(arr))) - (square(sum(arr))));
+
+    expect(diff).toBe(70);
   });
 
   it("should find the 10001st prime", function () {
+    var primeCount = 0;
+    var startNum = 0;
 
+    function isPrime(num) {
+      if (num <= 1) {
+        return false;
+      } 
+      for (var i = 2; i < num; i++) {
+        if (num % i === 0) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    while(primeCount !== 10001) {
+      startNum++;
+      if (isPrime(startNum)) {
+        primeCount++;
+      }
+    }
+
+    expect(startNum).toBe(104743);
   });
 
 });
