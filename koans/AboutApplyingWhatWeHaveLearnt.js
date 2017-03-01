@@ -78,30 +78,61 @@ describe("About Applying What We Have Learnt", function() {
         }
     }
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   it("should count the ingredient occurrence (functional)", function () {
     var ingredientCount = { "{ingredient name}": 0 };
 
     /* chain() together map(), flatten() and reduce() */
+    var ingredientList = _(products).chain()
+                                    .map(function(y) {return y.ingredients;})
+                                    .flatten()
+                                    .value()
 
-    expect(ingredientCount['mushrooms']).toBe(FILL_ME_IN);
+    // need to come back and fix this as it's not a functional implementation
+    for (i = 0; i < ingredientList.length; i++) {
+      ingredientCount[ingredientList[i]] = (ingredientCount[ingredientList[i]] || 0) + 1;
+    }
+
+    expect(ingredientCount['mushrooms']).toBe(2);
   });
 
   /*********************************************************************************/
-  /* UNCOMMENT FOR EXTRA CREDIT */
-  /*
+
   it("should find the largest prime factor of a composite number", function () {
-  
+    var composite = 27;
+
+    var largestPrime = _(_.range(1, composite)).chain()
+                                               .filter(function(x) {return composite % x === 0;})
+                                               .reduce(function(a, b) {if (b > a) {return b;} else {return a;};})
+                                               .value();
+
+    expect(largestPrime).toBe(9);
   });
 
   it("should find the largest palindrome made from the product of two 3 digit numbers", function () {
-    
-  });
+    var digitProduct = 345 * 678;
 
+    digitProduct = digitProduct.toString();
+    var largestPalindrome = 0;
+
+    for (i = 0; i < digitProduct.length - 1; i++) {
+      for (j = i + 1; j < digitProduct.length; j++) {
+        var num = digitProduct.slice(i, j);
+        var numReverse = num.split('').reverse().join('');
+        if (num === numReverse && parseInt(num) > largestPalindrome) {
+          largestPalindrome = parseInt(num);
+        }
+      }
+    }
+
+    expect(largestPalindrome).toBe(33);
+  });
+  
+  // still working on the three problems below
   it("should find the smallest number divisible by each of the numbers 1 to 20", function () {
-      
+    var numbers = _(_.range(1, 20)).map(function(x) {return x % === 0});  
     
   });
 
@@ -112,5 +143,5 @@ describe("About Applying What We Have Learnt", function() {
   it("should find the 10001st prime", function () {
 
   });
-  */
+
 });
