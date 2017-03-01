@@ -104,7 +104,6 @@ describe("About Functions", function() {
      
     var multiply = function(a, b) {return a * b;};
 
-    // expect(multiply.toString()).toBe("function(a, b) {return a * b;}");
-    expect(multiply.toString()).toBe(multiply.toString());
+    expect(multiply.toString()).toBe("function (a, b) {return a * b;}"); 
   });    
 });
